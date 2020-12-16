@@ -1,116 +1,67 @@
 <template>
   <div class="home">
-    <Search></Search>
-    <div class="content">
-      <Menu></Menu>
-      <img
-        class="van-image__img"
-        data-src="https://www.szsmyg.com/upload_file/200617/15923577406206.png"
-        src="https://www.szsmyg.com/upload_file/200617/15923577406206.png"
-        lazy="loaded"
-        style="object-fit: cover;"
-      />
-      <div class="nav-list item2" data-v-375518d2="">
-        <a href="/activity/ticket" class="nav-item" data-v-375518d2=""
-          ><div class="van-image" data-v-375518d2="">
-            <img
-              class="van-image__img"
-              style="object-fit:cover;"
-              data-src="/img/home-xinrenyouli.png"
-              src="https://m.szsmyg.com/img/home-xinrenyouli.png"
-              lazy="loaded"
-            /></div
-        ></a>
-        <a href="/activity/cooperate" class="nav-item" data-v-375518d2=""
-          ><div class="van-image" data-v-375518d2="">
-            <img
-              class="van-image__img"
-              style="object-fit:cover;"
-              data-src="https://m.szsmyg.com//img/home-gongyinshang.png"
-              src="https://m.szsmyg.com/img/home-gongyinshang.png"
-              lazy="loaded"
-            /></div
-        ></a>
-      </div>
-      <Notify></Notify>
-      <HotBrand></HotBrand>
-      <Information></Information>
-      <Footer></Footer>
+    <div id="nav">
+      <img src="../../assets/logo.d291ac7.png" alt="">
+      <van-search shape="round" placeholder="请输入搜索关键词" @click="tex" />
     </div>
+    aaaaaa
   </div>
 </template>
 
 <script>
-import Search from './components/Search'
-import Menu from './components/Menu'
-import Notify from './components/Notify'
-import HotBrand from './components/HotBrand'
-import Information from './components/Information'
-import Footer from './components/Footer'
 export default {
-  data () {
-    return {}
+  data() {
+    return {
+      
+    };
   },
   computed: {},
   watch: {},
-  methods: {},
-  created () {},
-  mounted () {},
-  beforeCreate () {},
-  beforeMount () {},
-  beforeUpdate () {},
-  updated () {},
-  beforeDestroy () {},
-  destroyed () {},
-  activated () {},
+  methods: {
+    tex(){
+       this.$router.push("/search");
+    }
+  },
+  created() {
+
+  },
+  mounted() {
+
+  },
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {
-    Search,
-    Menu,
-    Notify,
-    HotBrand,
-    Information,
-    Footer
-  }
+    
+  },
 }
 </script>
-<style lang="scss" scoped>
-.home {
-  // display: flex;
-  // flex-direction: column;
-  .content {
-    // flex: 1;
-    overflow: auto;
-  }
+<style scoped>
+#nav{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 55.25px;
+    padding-left: 14px;
+    padding-right: 15px;
+    background: linear-gradient(135deg,#009de6,#0090da);
+    display: flex;
+    align-items: center;
 }
-#nav {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 55.25px;
-  padding-left: 14px;
-  padding-right: 15px;
-  background: linear-gradient(135deg, #009de6, #0090da);
-  display: flex;
-  align-items: center;
-}
-#nav img {
+#nav img{
   width: 42px;
   height: 22px;
 }
-#nav .van-search {
+#nav .van-search{
   background: none;
   width: 350.562px;
   height: 35.45;
-  padding-left: 16.57px;
+  padding-left:16.57px;
 }
-div.nav-list {
-  padding: 16.56px;
-  display: flex;
-  justify-content: space-between;
-  div {
-    width: 184.71px;
-    height: 82.79px;
-  }
-}
+
 </style>
