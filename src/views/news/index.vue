@@ -1,12 +1,13 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
-    <tablebar v-show="$route.meta.showfooter"></tablebar>
+  <div id="news">
+    <Header></Header>
+    <Content></Content>
   </div>
 </template>
 
 <script>
-import Nav from './components/nav.vue'
+import Header from './components/Header'
+import Content from './components/Content'
 export default {
   data () {
     return {}
@@ -24,7 +25,8 @@ export default {
   destroyed () {},
   activated () {},
   components: {
-    tablebar: Nav
+    Header,
+    Content
   }
 }
 </script>

@@ -61,8 +61,9 @@
         <span>品牌</span>
         <img src="../../../../assets/下载.png" alt="" class="tu_1">
       </div>
-      
-      
+      <div >
+
+      </div>
     </div>
   </van-popup>
   </div>
@@ -263,6 +264,7 @@ export default {
   },
   created() {
       this.url=(window.location.search).substr(1)
+      console.log(this.url)
       this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
       this.status= res.data.status
       if(this.status==500){
