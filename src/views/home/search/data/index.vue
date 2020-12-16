@@ -264,7 +264,6 @@ export default {
   },
   created() {
       this.url=(window.location.search).substr(1)
-      console.log(this.url)
       this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
       this.status= res.data.status
       if(this.status==500){
