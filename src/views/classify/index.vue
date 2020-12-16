@@ -1,6 +1,6 @@
 <template>
   <div class="classify">
-    分类
+    王德家
   </div>
 </template>
 <style  scoped>
