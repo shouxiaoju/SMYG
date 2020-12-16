@@ -61,9 +61,8 @@
         <span>品牌</span>
         <img src="../../../../assets/下载.png" alt="" class="tu_1">
       </div>
-      <div >
-
-      </div>
+      
+      
     </div>
   </van-popup>
   </div>
