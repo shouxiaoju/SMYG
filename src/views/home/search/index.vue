@@ -1,13 +1,13 @@
 <template>
-  <div class='search'>
-    <van-nav-bar  left-text="返回" left-arrow>
+  <div class="search">
+    <van-nav-bar left-text="返回" left-arrow>
       <template #right>
-       <form action="/">
+        <form action="/">
           <van-search
             v-model="value"
             show-action
             shape="round"
-            action-text='搜索'
+            action-text="搜索"
             placeholder="请输入搜索关键词"
             @search="onSearch"
             @cancel="onCancel"
@@ -19,45 +19,43 @@
 </template>
 
 <script>
-import { Search } from 'mint-ui';
-import { Toast } from 'vant';
+import { Toast } from 'vant'
 export default {
-  data() {
+  data () {
     return {
-      result:'',
-      value:''
-    };
+      result: '',
+      value: ''
+    }
   },
   computed: {},
   watch: {},
   methods: {
-     onSearch(val) {
-      Toast(val);
+    onSearch (val) {
+      Toast(val)
     },
-    onCancel() {
-      Toast('sousuo');
-    },
+    onCancel () {
+      Toast('sousuo')
+    }
   },
-  created() {
-
+  created () {
+    this.$http.get('/api/index.php/index/index/get_tdk').then(res => {
+      console.log(res)
+    })
   },
-  mounted() {
-
-  },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
-  components: {},
+  mounted () {},
+  beforeCreate () {},
+  beforeMount () {},
+  beforeUpdate () {},
+  updated () {},
+  beforeDestroy () {},
+  destroyed () {},
+  activated () {},
+  components: {}
 }
 </script>
 
-<style  scoped>
-.van-search{
+<style scoped>
+.van-search {
   width: 330px;
-  
 }
 </style>

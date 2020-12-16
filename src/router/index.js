@@ -6,54 +6,62 @@ import Inquiry from '../views/inquiry/index'
 import Car from '../views/car/index'
 import Main from '../views/main/index'
 import Search from '../views/home/search/index'
+import News from '../views/news/index'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: "home"
+    redirect: 'home'
   },
   {
-    path:"/home",
-    component:Home,
-    meta:{
-      showfooter:true
+    path: '/home',
+    component: Home,
+    meta: {
+      showfooter: true
     }
   },
   {
-    path:"/search",
-    component:Search,
-    meta:{
-      showfooter:false
+    path: '/news',
+    component: News,
+    meta: {
+      showfooter: false
     }
   },
   {
-    path:"/classify",
-    component:classify,
-    meta:{
-      showfooter:true
+    path: '/search',
+    component: Search,
+    meta: {
+      showfooter: false
     }
   },
   {
-    path:"/inquiry",
-    component:Inquiry,
-    meta:{
-      showfooter:true
+    path: '/classify',
+    component: classify,
+    meta: {
+      showfooter: true
     }
   },
   {
-    path:"/car",
-    component:Car,
-    meta:{
-      showfooter:true
+    path: '/inquiry',
+    component: Inquiry,
+    meta: {
+      showfooter: true
     }
   },
   {
-    path:"/main",
-    component:Main,
-    meta:{
-      showfooter:true
+    path: '/car',
+    component: Car,
+    meta: {
+      showfooter: true
+    }
+  },
+  {
+    path: '/main',
+    component: Main,
+    meta: {
+      showfooter: true
     }
   }
 ]
