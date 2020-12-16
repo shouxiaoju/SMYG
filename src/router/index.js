@@ -64,18 +64,18 @@ const routes = [
     meta: {
       showfooter: true
     }
-  } ,
-  {
-    path:"/data",
-    component:Data,
-    meta:{
-      showfooter:false
-    }
   },
+  {
+    path: '/data',
+    component: Data,
+    meta: {
+      showfooter: false
+    }
+  }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes
 })
 
