@@ -6,6 +6,7 @@ import Inquiry from '../views/inquiry/index'
 import Car from '../views/car/index'
 import Main from '../views/main/index'
 import Search from '../views/home/search/index'
+import Data from '../views/home/search/data/index'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,13 @@ const routes = [
   {
     path:"/search",
     component:Search,
+    meta:{
+      showfooter:false
+    }
+  },
+  {
+    path:"/data",
+    component:Data,
     meta:{
       showfooter:false
     }
@@ -59,8 +67,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   routes
 })
 
 export default router
+

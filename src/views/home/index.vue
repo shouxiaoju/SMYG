@@ -4,6 +4,7 @@
       <img src="../../assets/logo.d291ac7.png" alt="">
       <van-search shape="round" placeholder="请输入搜索关键词" @click="tex" />
     </div>
+    aaaaaa
   </div>
 </template>
 

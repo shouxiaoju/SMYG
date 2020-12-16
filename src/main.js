@@ -6,14 +6,17 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import axios from 'axios'
 
 
 Vue.use(MintUI)
 Vue.use(Vant);
 Vue.config.productionTip = false
+Vue.prototype.$http=axios
 
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
