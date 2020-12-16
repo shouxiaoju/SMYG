@@ -1,6 +1,6 @@
 <template>
   <div class="classify">
-    分类
+    分类————-------------哈哈哈
   </div>
 </template>
 <style scoped></style>
