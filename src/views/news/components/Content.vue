@@ -7,10 +7,6 @@
       />
     </div>
     <van-tabs sticky offset-top="50" @click="onClick">
-      <!-- <van-tabs @click="onClick">
-        <van-tab title="标签 1">内容 1</van-tab>
-        <van-tab title="标签 2">内容 2</van-tab>
-      </van-tabs> -->
       <van-tab
         v-for="item in title"
         :key="item.id"
@@ -21,6 +17,7 @@
           v-model="loading"
           :finished="finished"
           finished-text="没有更多了"
+          :immediate-check="bool"
           @load="onLoad"
         >
           <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
@@ -56,7 +53,8 @@ export default {
         { tit: '公告', id: 2 }
       ],
       loading: false,
-      finished: false
+      finished: false,
+      bool: false
     }
   },
   computed: {},
@@ -72,28 +70,42 @@ export default {
           this.newsList.forEach(item => {
             this.Lists.push(item)
           })
-          this.newsList = []
         })
     },
     onLoad () {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
       setTimeout(() => {
-        this.page++
         this.getList(this.page, this.type)
 
         // 加载状态结束
         this.loading = false
 
         // 数据全部加载完成
-        if (this.newsList === []) {
+        if (this.newsList.length === 0) {
           this.finished = true
         }
+        console.log(this.newsList.length)
+        this.page += 1
       }, 1000)
     },
-    onClick (name, title, key) {
-      console.log(key)
-      // Toast(title);
+    onClick (num, title) {
+      this.page = 1
+      this.Lists = []
+      switch (num) {
+        case 0:
+          this.type = 1
+          this.getList(this.page, this.type)
+          break
+        case 1:
+          this.type = 3
+          this.getList(this.page, this.type)
+          break
+        case 2:
+          this.type = 2
+          this.getList(this.page, this.type)
+          break
+      }
     }
   },
   created () {
