@@ -35,7 +35,7 @@
             <p>封装：  {{item.feng_zhuang}}</p>
           </span>
         </b>
-        <div class="but">
+        <div class="but" @click="jcar(item.item_id)">
             加入购物车
           </div>
         <div class="xiangq">
@@ -65,7 +65,17 @@
 
       </div>
     </div>
-  </van-popup>
+    </van-popup>
+    <!-- <van-popup v-model="show2" position="bottom" :style="{ height: '50%' }" >
+    <h3>{{this.heihei.name}}</h3>
+        <p>品牌：{{this.heihei.brand}}</p>
+        <p>型号：{{this.heihei.name}}</p>
+        <p>封装：{{this.heihei.feng_zhuang}}</p>
+        <p>包装方式：{{this.heihei.bao_zhuang_fang_shi}}</p>
+        <van-stepper v-model="jiage" />
+         <p>{{this.jiage}}</p>
+         
+    </van-popup> -->
   </div>
 </template>
 
@@ -94,6 +104,9 @@ export default {
       loading: false,
       finished: false,
       tishi:'没有更多了',
+      show2:false,
+      heihei:'',
+      jiage:1
     };
   },
   computed: {},
@@ -101,6 +114,12 @@ export default {
     
   },
   methods: {
+    jcar(index){
+       this.$http.get(`/api/index.php/index/order/addCart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token=&jingying_type=1&type=1&item_id=${index}&item_num=3`).then((res)=>{
+      console.log( res)
+    })
+      
+    },
     handleScroll() {
       var top = Math.floor( document.documentElement.scrollTop)
       var het= Math.floor( document.documentElement.scrollHeight)
@@ -441,5 +460,36 @@ ul li span p{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.main{
+    padding-left: 10px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    
+}
+.xian{
+    position: absolute;
+    top: 110px;
+    left: 80px;
+    display: flex;
+  
+}
+.xian span{
+    width: 160px;
+   font-size: 12;
+}
+.xian span p{
+    margin: 0;
+}
+.xian span:nth-of-type(1){
+    text-align:right;
+}
+.xian span:nth-of-type(2){
+    color: #ff7802;
+}
+.van-stepper{
+  margin-top: 20px;
+  width: 100%;
+  height: 60px;
 }
 </style>

@@ -18,7 +18,7 @@
       </template>
     </van-nav-bar>
     <div v-if="sousuo">
-      <van-loading size="24px" vertical v-if="flax">热门加载搜索中...</van-loading>
+      <van-loading size="24px" vertical v-if="flax">热门搜索加载中...</van-loading>
       <ul>
         <router-link to="" tag="li" v-for="(item , index) in hotserve" :key="index">{{item.keyword}}</router-link>
       </ul>
