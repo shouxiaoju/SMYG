@@ -8,11 +8,24 @@
         @click-left="onClickLeft"
         @click-right="onClickRight"
       />
-      <van-submit-bar v-if="a" :price="3050" button-text="提交订单" @submit="onSubmit">
-        <van-checkbox v-model="checked">全选</van-checkbox>
+        <ul>
+        　　<li v-for="(item,index) in list" :key="index" style="margin-top:20px;">
+        　　　　<input type="checkbox" v-model="checkModel" :value="item.id">
+        　　　　<img :src="item.pic" alt="" v-if="item.pic!=null"> 
+                <img v-if="item.pic==null" src="../../assets/smygbox.png" alt="">
+        　　　<div>
+              <p>{{item.name}}</p>
+              <p>型号：{{item.name}}</p>
+              <p><span>￥</span>{{item.price}}</p>
+              </div>
+              <van-stepper :v-model="value" />
+        　　</li>
+        </ul>
+      <van-submit-bar class="box1" v-if="a" :price="0" button-text="提交订单" @submit="onSubmit">
+        <input type="checkbox" @click="checkAll" v-model="checked" value="全选" class="ckae">
       </van-submit-bar>
-      <van-submit-bar v-if="a==false"  button-text="删除" @submit="delt" >
-        <van-checkbox v-model="checked" class="ckae">全选</van-checkbox>
+      <van-submit-bar class="box1" v-if="a==false"  button-text="删除" @submit="delt" >
+        <input type="checkbox" @click="checkAll" v-model="checked" value="全选" class="ckae">
       </van-submit-bar>
   </div>
 </template>
@@ -21,12 +34,25 @@
 export default {
   data() {
     return {
+      value:'',
       checked:'',
-      a:true
+      a:true,
+      list:[],
+　　　checked:false, //是否全选
+　　　checkModel:[] //双向数据绑定的数组，我是用的id
+     
     };
   },
   computed: {},
-  watch: {},
+  watch: {
+    checkModel(){
+　　　　if(this.checkModel.length==this.list.length){
+　　　　　　this.checked=true;
+　　　　}else{
+　　　　　　this.checked=false;
+　　　　}
+　　}
+  },
   methods: {
     onSubmit(){
      console.log("tijao")
@@ -40,9 +66,25 @@ export default {
     onClickRight() {
       this.a=!this.a
     },
+  
+   checkAll(){
+　　　　if(this.checked){
+　　　　　　this.checkModel=[];
+　　　　}else{
+　　　　　　this.list.forEach((item)=>{
+　　　　　　if(this.checkModel.indexOf(item.id)==-1){
+　　　　　　　　this.checkModel.push(item.id)
+　　　　　　}
+　　　　　　})
+　　　　}
+　　}
   },
   created() {
-
+     this.$http.get(`/api//index.php/index/index_order/cart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token=`).then((res)=>{
+      this.list=res.data.data.other
+      console.log(res)
+      console.log(res.data.data.other)
+    }) 
   },
   mounted() {
 
@@ -59,8 +101,39 @@ export default {
 </script>
 
 <style  scoped>
-.van-checkbox{
+*{
+  margin: 0;
+  padding: 0;
+}
+.ckae{
   position: absolute;
   left: 10px;
+}
+img{
+  width: 88px;
+  height: 88px;
+ margin-right: 10px;
+}
+ul li{
+  height: 135px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+ul li div{
+  height: 135px;
+  overflow: hidden;
+}
+ul li div p:nth-of-type(1){
+  margin-top: 20px;
+}
+ul li div p:nth-of-type(3){
+  color: red;
+}
+.van-stepper{
+  height: 30px;
+  position: absolute;
+  right: 0;
+  bottom: 10px;
 }
 </style>
