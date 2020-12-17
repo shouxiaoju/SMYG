@@ -27,13 +27,33 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      username: '',
+      password: ''
+    }
   },
   computed: {},
   watch: {},
   methods: {
     setIn () {
-      this.$http.post('/api/index.php/index/login/loginweb')
+      var formdata = new FormData()
+      formdata.append('username', this.username)
+      formdata.append('password', this.password)
+      this.$http
+        .post('/api/index.php/index/login/loginweb', formdata)
+        .then(res => {
+          const result = res.data
+          const info = result.info
+          const uid = res.data.uid
+          const code = result.status
+          if (code === 200) {
+            localStorage.setItem('token', uid)
+            alert(info)
+          } else {
+            alert(info)
+          }
+          console.log(result, uid)
+        })
     }
   },
   created () {},
