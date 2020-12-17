@@ -26,7 +26,7 @@
       <van-list v-model="loading" :finished="finished" :finished-text="tishi" >
       <li v-for="(item,index) in list" :key="index">
         <p class="p1">{{item.name}}</p>
-        <router-link to="" class="a1">
+        <b class="a1" @click="tiaozhuan(item.item_id)" >
           <img :src="item.pic" alt="" v-if="item.pic!=null"> 
           <img v-if="item.pic==null" src="../../../../assets/smygbox.png" alt="">
           <span>
@@ -34,7 +34,7 @@
             <p>型号：  {{item.model_name}}</p>
             <p>封装：  {{item.feng_zhuang}}</p>
           </span>
-        </router-link>
+        </b>
         <div class="but">
             加入购物车
           </div>
@@ -259,9 +259,15 @@ export default {
         this.rotate=index
     
       },
+      //跳详情
+      tiaozhuan(name){
+        this.$router.push(`/detail?${name}`);
+        //console.log(name)
+      }
   },
   created() {
       this.url=(window.location.search).substr(1)
+       //this.url=(location.hash || '').split('?')[1].split('&')
       console.log(this.url)
       this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
       this.status= res.data.status
@@ -396,10 +402,11 @@ ul li span p{
   margin-top: 6px;
   margin-left: 6px;
 }
-a{
+.a1{
   display: block;
   height: 143px;
   overflow: hidden;
+  font-weight: 400;
 }
 .aa{
     transition: all 0.3s;

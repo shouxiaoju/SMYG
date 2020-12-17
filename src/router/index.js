@@ -8,6 +8,7 @@ import Main from '../views/main/index'
 import Search from '../views/home/search/index'
 import News from '../views/news/index'
 import Data from '../views/home/search/data/index'
+import Detail from '../views/detail/index'
 
 Vue.use(VueRouter)
 
@@ -68,6 +69,13 @@ const routes = [
   {
     path: '/data',
     component: Data,
+    meta: {
+      showfooter: false
+    }
+  },
+  {
+    path: '/detail',
+    component: Detail,
     meta: {
       showfooter: false
     }

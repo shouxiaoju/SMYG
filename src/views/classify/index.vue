@@ -3,14 +3,13 @@
     <van-search @click="onSearch1"  shape="round" placeholder="请输入元器件型号/参数" />
     <div class="call">
     <van-sidebar v-model="activeKey" >
-      <div class="div1" v-for="(item) in list" :key="item.cid" @click="buut(item.cid,item.name )">
+      <div class="div1" v-for="(item) in list" :key="item.cid" @click="buut(item.cid )">
         <van-sidebar-item  :title="item.name" />
       </div>
     </van-sidebar>
     </div>
     <div class="div2">
       <ul>
-        <p class="p1">{{name}}</p>
         <li v-for="(item,index) in list1" :key="index" @click="but(item.cid)">
           <div style="text-aling='center'">
             <img :src="item.icon_pic" alt="" v-if="item.icon_pic!=''"> 
@@ -32,7 +31,7 @@ export default {
       list:[],
       id:105,
       list1:[],
-      name:'电阻'
+      uid:''
     };
   },
   computed: {
@@ -48,9 +47,9 @@ export default {
     but(id2){
       this.$router.push(`/data?&cid_1=${this.id}&cid_2=${id2}`);
     },
-    buut(cid,name){
+    buut(cid){
       this.id=cid
-      this.name=name
+      //this.name=name
       this.$http.get(`/api/index.php/index/item/catlist?cid=${this.id}`).then((res)=>{
       console.log(res.data.data)
       this.list1=res.data.data
@@ -59,6 +58,14 @@ export default {
     }
   },
   created() {
+   
+    
+    this.activeKey=(window.location.search).substr(1).split('&')[0]
+    if((window.location.search).substr(1).split('&')[1]){
+      this.id=(window.location.search).substr(1).split('&')[1]
+    }else{
+      this.id=105
+    }
     this.$http.get('/api/index.php/index/item/catlist').then((res)=>{
       this.list=res.data.data
     })

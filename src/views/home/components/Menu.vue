@@ -13,7 +13,7 @@
         class="item"
         icon="https://www.szsmyg.com/upload_pic/181002/more_one.png"
         text="更多"
-        to="/classify"
+        to="/classify?0&105"
       />
     </van-grid>
   </div>
