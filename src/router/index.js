@@ -9,6 +9,7 @@ import Search from '../views/home/search/index'
 import News from '../views/news/index'
 import Data from '../views/home/search/data/index'
 import Detail from '../views/detail/index'
+import Login from '../views/login'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,13 @@ const routes = [
   {
     path: '/news',
     component: News,
+    meta: {
+      showfooter: false
+    }
+  },
+  {
+    path: '/login',
+    component: Login,
     meta: {
       showfooter: false
     }

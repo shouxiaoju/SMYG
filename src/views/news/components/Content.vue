@@ -85,7 +85,7 @@ export default {
         if (this.newsList.length === 0) {
           this.finished = true
         }
-        console.log(this.newsList.length)
+        // console.log(this.newsList.length)
         this.page += 1
       }, 1000)
     },
