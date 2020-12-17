@@ -3,11 +3,11 @@
     <van-grid id="van-grid" column-num="5" icon-size="33px">
       <van-grid-item
         class="item"
-        v-for="item in dataList"
+        v-for="(item, index) in dataList"
         :key="item.cid"
         :icon="item.icon_pic"
         :text="item.name"
-        @click="onclick(item.cid)"
+        @click="onclick(item.cid, index)"
       />
       <van-grid-item
         class="item"
@@ -32,14 +32,10 @@ export default {
     getList () {
       this.$http.get('/api/index.php/index/item/catlist').then(res => {
         this.dataList = res.data.data.splice(0, 9)
-        // console.log(this.dataList);
-        // this.dataList.forEach(item => {
-        //   console.log(item.cid);
-        // });
       })
     },
-    onclick (id) {
-      this.$router.push(`/classify?${id}`)
+    onclick (id, num) {
+      this.$router.push(`/classify?${id}&${num}`)
     }
   },
   created () {
