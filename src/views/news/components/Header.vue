@@ -1,11 +1,7 @@
 <template>
   <div class="header">
-    <div class="top">
-      <span>
-        <van-nav-bar class="back" left-arrow></van-nav-bar>
+        <van-nav-bar class="back" left-arrow @click-left='back'></van-nav-bar>
         <img src="https://m.szsmyg.com/_nuxt/img/logo2.29718ed.png" alt="" />
-      </span>
-    </div>
   </div>
 </template>
 
@@ -16,7 +12,12 @@ export default {
   },
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    back () {
+      this.$router.push('/home')
+      console.log('aaa')
+    }
+  },
   created () {},
   mounted () {},
   beforeCreate () {},
@@ -32,17 +33,18 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  height: 50px;
+
   background: #fff;
-}
-div.top {
-  height: 50px;
-  span {
     display: block;
     width: 100%;
     height: 50px;
     text-align: center;
     position: fixed;
+    opacity:1;
+    z-index:99999
+}
+
+    // background:red
 
     .back {
       position: absolute;
@@ -50,6 +52,7 @@ div.top {
     }
 
     img {
+
       width: 110px;
       position: absolute;
       top: 0;
@@ -58,6 +61,4 @@ div.top {
       right: 0;
       margin: auto;
     }
-  }
-}
 </style>

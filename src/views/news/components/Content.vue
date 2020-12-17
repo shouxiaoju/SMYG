@@ -6,29 +6,24 @@
         alt=""
       />
     </div>
-    <van-tabs sticky>
-      <van-tab v-for="item in title" :key="item.id" :title="item">
-        <ul class="news">
-          <li v-for="item in Lists" :key="item.id">
-            <img :src="item.pic" alt="" />
-            <div class="box">
-              <p>{{ item.title }}</p>
-              <div>
-                <span>发布时间:</span>
-                <span>{{ item.create_time }}</span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </van-tab>
-    </van-tabs>
-    <!-- <van-sticky :offset-top="50">
-       <van-button type="info">吸顶距离</van-button>
-     <ul class="nav">
-        <li v-for="item in title" :key="item">{{ item }}</li>
-      </ul>
-      <van-tabs v-model="active">
-        <van-tab title="标签 1">
+    <van-tabs sticky offset-top="50" @click="onClick">
+      <!-- <van-tabs @click="onClick">
+        <van-tab title="标签 1">内容 1</van-tab>
+        <van-tab title="标签 2">内容 2</van-tab>
+      </van-tabs> -->
+      <van-tab
+        v-for="item in title"
+        :key="item.id"
+        :title="item.tit"
+        :id="item.id"
+      >
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
           <ul class="news">
             <li v-for="item in Lists" :key="item.id">
               <img :src="item.pic" alt="" />
@@ -41,11 +36,9 @@
               </div>
             </li>
           </ul>
-        </van-tab>
-        <van-tab title="标签 2">内容 2</van-tab>
-        <van-tab title="标签 3">内容 3</van-tab>
-      </van-tabs>
-    </van-sticky> -->
+        </van-list>
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
@@ -53,30 +46,55 @@
 export default {
   data () {
     return {
+      page: 1,
+      type: 1,
       Lists: [],
       newsList: [],
-      title: ['资讯', '早报', '公告']
+      title: [
+        { tit: '资讯', id: 1 },
+        { tit: '早报', id: 3 },
+        { tit: '公告', id: 2 }
+      ],
+      loading: false,
+      finished: false
     }
   },
   computed: {},
   watch: {},
   methods: {
-    getList () {
-      this.$http.get('/api/index.php/index/news').then(res => {
-        this.Lists = res.data.data.data
-        console.log(this.Lists)
-      })
+    getList (page, type) {
+      this.$http
+        .get(
+          `/api/index.php/index/news/index?page=${this.page}&type=${this.type}`
+        )
+        .then(res => {
+          this.newsList = res.data.data.data
+          this.newsList.forEach(item => {
+            this.Lists.push(item)
+          })
+          this.newsList = []
+        })
+    },
+    onLoad () {
+      // 异步更新数据
+      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+      setTimeout(() => {
+        this.page++
+        this.getList(this.page, this.type)
+
+        // 加载状态结束
+        this.loading = false
+
+        // 数据全部加载完成
+        if (this.newsList === []) {
+          this.finished = true
+        }
+      }, 1000)
+    },
+    onClick (name, title, key) {
+      console.log(key)
+      // Toast(title);
     }
-    /* click() {
-      this.$http.get("/api/index.php/index/news/index").then(res => {
-        this.newsList2 = res.data.data.data;
-        // this.newsList1;
-        this.newsList2.forEach(item => {
-          this.newsList1.push(item);
-        });
-        console.log(this.newsList1);
-      });
-    } */
   },
   created () {
     this.getList()
@@ -100,6 +118,7 @@ div.content {
   div.pic {
     width: 100%;
     height: 194px;
+    margin-top: 50px;
     overflow: hidden;
   }
   .van-tabs__nav {

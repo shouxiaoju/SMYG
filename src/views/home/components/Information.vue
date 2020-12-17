@@ -36,7 +36,7 @@ export default {
     getList () {
       this.$http.get('/api/index.php/index/news/index').then(res => {
         this.newsList = res.data.data.data.splice(0, 5)
-        console.log(this.newsList)
+        // console.log(this.newsList)
       })
     }
   },
