@@ -1,26 +1,27 @@
 <template>
   <div class="login">
-    <van-form>
+    <div class="bgTop">
+      <i class="van-icon van-icon-arrow-left"></i>
+      <div @click="click">
+        <p :class="{ active: falg }">注册</p>
+        <p :class="{ active: !falg }">登录</p>
+      </div>
+    </div>
+    <div class="form">
       <van-field
         v-model="username"
-        name="用户名"
-        label="用户名"
-        placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
+        placeholder="请输入手机号"
+        type="tel"
+        input-align="center"
       />
       <van-field
         v-model="password"
+        placeholder="请输入密码"
         type="password"
-        name="密码"
-        label="密码"
-        placeholder="密码"
-        :rules="[{ required: true, message: '请填写密码' }]"
+        input-align="center"
       />
-      <div style="margin: 16px;">
-        <van-button round type="info" @click="setIn">立即登录</van-button>
-        <!-- <van-button round type="info" to="/register">立即注册</van-button> -->
-      </div>
-    </van-form>
+      <van-button type="info" size="large" @click="setIn">登录</van-button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +30,8 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      falg: false
     }
   },
   computed: {},
@@ -45,15 +47,17 @@ export default {
           const result = res.data
           const info = result.info
           const uid = res.data.uid
-          const code = result.status
+          const code = +result.status
           if (code === 200) {
             localStorage.setItem('token', uid)
-            alert(info)
+            this.$router.push('/')
           } else {
             alert(info)
           }
-          console.log(result, uid)
         })
+    },
+    click () {
+      this.falg = !this.falg
     }
   },
   created () {},
@@ -69,4 +73,50 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+.login {
+  .bgTop {
+    width: 100%;
+    height: 239px;
+    background-image: url("https://m.szsmyg.com/_nuxt/img/login-banner.fbecc7f.png");
+    background-size: cover;
+    position: relative;
+    i.van-icon {
+      position: relative;
+      font-size: 24px;
+      color: #fff;
+      text-rendering: auto;
+      top: 11px;
+      left: 11px;
+    }
+    div {
+      width: 100%;
+      height: 46px;
+      position: absolute;
+      bottom: 0;
+      color: #fff;
+      p {
+        width: 50%;
+        height: 100%;
+        line-height: 46px;
+        display: inline-block;
+        text-align: center;
+      }
+      .active {
+        color: #edee0c;
+      }
+    }
+  }
+  div.form {
+    padding: 0 11px;
+    div.van-field {
+      width: 100%;
+      height: 55px;
+    }
+  }
+}
+</style>
