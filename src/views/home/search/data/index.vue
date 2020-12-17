@@ -94,7 +94,6 @@ export default {
       loading: false,
       finished: false,
       tishi:'没有更多了',
-      
     };
   },
   computed: {},
@@ -118,7 +117,6 @@ export default {
               this.tishi="没有更多商品了"
               return
             }else{
-              
               this.newlist=res.data.data
               this.newlist.forEach(item => {
                 this.list.push(item)
@@ -198,7 +196,7 @@ export default {
     },
     //返回
     onClickLeft(){
-      this.$router.push("/search");
+      this.$router.go(-1)
     },
     //综合排序
      zonghe() {
@@ -264,6 +262,7 @@ export default {
   },
   created() {
       this.url=(window.location.search).substr(1)
+      console.log(this.url)
       this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
       this.status= res.data.status
       if(this.status==500){
@@ -271,10 +270,10 @@ export default {
         this.tishi="没有找得到符合要求的商品"
       }else{
         this.newlist1= res.data.data
-      this.newlist1.forEach(item => {
+        this.newlist1.forEach(item => {
               this.list.push(item)
             });
-            this.c=0
+        this.c=0
       }
     })
   },

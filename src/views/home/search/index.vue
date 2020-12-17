@@ -47,7 +47,8 @@ export default {
     },
     //返回
    onClickLeft(){
-      this.$router.push("/home");
+      this.$router.go(-1)
+      //this.$router.push("/home");
    }
   },
   //获取热门搜索
