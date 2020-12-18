@@ -34,10 +34,12 @@ export default {
   watch: {},
   methods: {
     getList () {
-      this.$http.get('/api/index.php/index/news/index').then(res => {
-        this.newsList = res.data.data.data.splice(0, 5)
-        // console.log(this.newsList)
-      })
+      this.$http
+        .get('/api/index.php/index/news/index')
+        .then(res => {
+          this.newsList = res.data.data.data.splice(0, 5)
+          // console.log(this.newsList)
+        })
     }
   },
   created () {

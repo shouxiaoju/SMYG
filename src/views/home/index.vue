@@ -75,12 +75,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-  // display: flex;
-  // flex-direction: column;
-  .content {
-    // flex: 1;
-    overflow: auto;
-  }
+  overflow: hidden;
 }
 #nav {
   position: fixed;

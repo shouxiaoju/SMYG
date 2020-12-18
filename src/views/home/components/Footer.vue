@@ -20,13 +20,13 @@
     </van-grid>
     <div class="text">
       <div class="weblink-link">
-        <div class="weblink-item">
+        <div class="weblink-item item">
           关于我们
         </div>
-        <div class="weblink-item">
+        <div class="weblink-item item">
           联系我们
         </div>
-        <div class="weblink-item">
+        <div class="weblink-item item">
           常见问题
         </div>
         <div class="weblink-item">
@@ -69,39 +69,34 @@ export default {
   padding: 11px 0 27px;
   box-sizing: border-box;
 }
-.weblink-link {
-  display: -webkit-box;
-  display: -ms-flexbox;
+div.weblink-link {
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding-left: 0.26667rem;
-  padding-right: 0.26667rem;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
+  padding: 0 11px;
   justify-content: center;
+  div.weblink-item {
+    margin: 0;
+    padding: 3px 9px;
+    border: 0;
+    outline: 0;
+    font-size: 12px;
+    vertical-align: baseline;
+    background: transparent;
+    color: #999;
+    box-sizing: border-box;
+    position: relative;
+  }
+  div.item:after {
+    content: "|";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    height: 80%;
+    width: 1px;
+    transform: translateY(-50%);
+  }
 }
-.weblink-item {
-  margin: 0;
-  padding: 3px 9px;
-  border: 0;
-  outline: 0;
-  font-size: 12px;
-  vertical-align: baseline;
-  background: transparent;
-  -webkit-box-sizing: border-box;
-  color: #999;
-  box-sizing: border-box;
-}
-.weblink-item:after {
-  content: "|";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  height: 80%;
-  width: 0.02667rem;
-  transform: translateY(-50%);
-}
+
 p {
   padding-top: 3px;
   text-align: center;
