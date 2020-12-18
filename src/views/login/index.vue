@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="bgTop">
-      <i class="van-icon van-icon-arrow-left"></i>
+      <i class="van-icon van-icon-arrow-left" @click="back"></i>
       <div @click="click">
         <p :class="{ active: falg }">注册</p>
         <p :class="{ active: !falg }">登录</p>
@@ -15,12 +15,16 @@
         input-align="center"
       />
       <van-field
+        v-if="!falg"
         v-model="password"
         placeholder="请输入密码"
         type="password"
         input-align="center"
       />
-      <van-button type="info" size="large" @click="setIn">登录</van-button>
+      <van-button type="info" size="large" v-if="!falg" @click="setIn"
+        >登录</van-button
+      >
+      <van-button type="info" size="large" v-else>注册</van-button>
     </div>
   </div>
 </template>
@@ -37,6 +41,9 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    back () {
+      this.$router.push('/main')
+    },
     setIn () {
       var formdata = new FormData()
       formdata.append('username', this.username)
