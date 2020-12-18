@@ -10,6 +10,8 @@ import News from '../views/news/index'
 import Data from '../views/home/search/data/index'
 import Detail from '../views/detail/index'
 import Login from '../views/login'
+import Set from '../views/set'
+import Order from '../views/order'
 
 Vue.use(VueRouter)
 
@@ -72,6 +74,20 @@ const routes = [
     component: Main,
     meta: {
       showfooter: true
+    }
+  },
+  {
+    path: '/set',
+    component: Set,
+    meta: {
+      showfooter: false
+    }
+  },
+  {
+    path: '/order',
+    component: Order,
+    meta: {
+      showfooter: false
     }
   },
   {

@@ -1,19 +1,21 @@
 <template>
   <div class="main">
     <div class="head">
-      <div class="icon">
+      <div class="icon" @click="link">
         <img src="https://m.szsmyg.com/_nuxt/img/my-set.f36d469.png" alt="" />
       </div>
       <div class="userInfo">
         <img src="https://api.szsmyg.com/images/user/face.png" alt="" />
-        <div>
+        <div v-if="falg">
           <h2>深铭易购用户</h2>
           <h3>您还没有填写个性签名呢</h3>
         </div>
+        <div class="txt" v-else @click="link">去登录/注册 ^_^</div>
       </div>
     </div>
+
     <div class="content">
-      <div class="myOrder">
+      <div class="myOrder" @click="click">
         <div>
           <h2>我的订单</h2>
           <p>查看所有订单</p>
@@ -82,12 +84,32 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      falg: false
+    }
   },
   computed: {},
   watch: {},
-  methods: {},
-  created () {},
+  methods: {
+    click () {
+      this.$router.push('/order')
+    },
+    setToken () {
+      if (JSON.parse(localStorage.getItem('token'))) {
+        this.falg = !this.falg
+      }
+    },
+    link () {
+      if (JSON.parse(localStorage.getItem('token'))) {
+        this.$router.push('/set')
+      } else {
+        this.$router.push('/login')
+      }
+    }
+  },
+  created () {
+    this.setToken()
+  },
   mounted () {},
   beforeCreate () {},
   beforeMount () {},
@@ -126,6 +148,10 @@ export default {
       width: 100%;
       height: 63px;
       padding: 19px 14px 0 16px;
+      div.txt {
+        line-height: 63px;
+        font-size: 26px;
+      }
       img {
         width: 63px;
         height: 63px;
