@@ -35,7 +35,10 @@ export default {
       })
     },
     onclick (id, num) {
-      this.$router.push(`/classify?${id}&${num}`)
+      this.$router.push({
+        path: '/classify',
+        query: { num, id }
+      })
     }
   },
   created () {

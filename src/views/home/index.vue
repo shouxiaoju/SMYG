@@ -75,9 +75,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+<<<<<<< HEAD
     overflow:hidden;
   }
 
+=======
+  overflow: hidden;
+}
+>>>>>>> d61c9b19c38affd07d762c49513f424a76da1dfd
 #nav {
   position: fixed;
   left: 0;
