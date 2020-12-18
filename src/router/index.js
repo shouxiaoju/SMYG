@@ -12,6 +12,7 @@ import Detail from '../views/detail/index'
 import Login from '../views/login'
 import Set from '../views/set'
 import Order from '../views/order'
+import Data1 from '../views/data1/index'
 
 Vue.use(VueRouter)
 
@@ -103,11 +104,17 @@ const routes = [
     meta: {
       showfooter: false
     }
+  },
+  {
+    path: '/data1',
+    component: Data1,
+    meta: {
+      showfooter: false
+    }
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
   routes
 })
 

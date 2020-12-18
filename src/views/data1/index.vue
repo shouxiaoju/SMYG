@@ -15,9 +15,9 @@
       <div class="xuanze">
           <span @click="zonghe">综合</span>
           <span @click="page">价格
-            <img src="../../../../assets/价格1.png" alt="" v-if="lujing==0">
-            <img src="../../../../assets/价格2.png" alt="" v-if="lujing==1">
-            <img src="../../../../assets/价格3.png" alt="" v-if="lujing==2">
+            <img src="../../assets/价格1.png" alt="" v-if="lujing==0">
+            <img src="../../assets/价格2.png" alt="" v-if="lujing==1">
+            <img src="../../assets/价格3.png" alt="" v-if="lujing==2">
           </span>
           <span @click="shaixuan">筛选</span>
       </div>
@@ -28,7 +28,7 @@
         <p class="p1">{{item.name}}</p>
         <b class="a1" @click="tiaozhuan(item.item_id)" >
           <img :src="item.pic" alt="" v-if="item.pic!=null"> 
-          <img v-if="item.pic==null" src="../../../../assets/smygbox.png" alt="">
+          <img v-if="item.pic==null" src="../../assets/smygbox.png" alt="">
           <span>
             <p>品牌： {{item.brand}}</p>
             <p>型号：  {{item.model_name}}</p>
@@ -42,7 +42,7 @@
           <span>商品价格</span> 
            <span class="span1">{{(item.arr_price.l)[0]}}:</span>
            <span class="span2">{{(item.arr_price.r)[0]}}</span>
-           <img src="../../../../assets/下载.png" alt="" :class="[a&&rotate==index?'go':'aa']" @click.self="start(index)">
+           <img src="../../assets/下载.png" alt="" :class="[a&&rotate==index?'go':'aa']" @click.self="start(index)">
          </div>
          <div class="xiangq1" v-if="rotate==index&&a">
            <span>
@@ -59,7 +59,7 @@
     <div class="popu1">
       <div class="pin1">
         <span>品牌</span>
-        <img src="../../../../assets/下载.png" alt="" class="tu_1">
+        <img src="../../assets/下载.png" alt="" class="tu_1">
       </div>
       <div >
 
@@ -91,6 +91,7 @@ export default {
       value:'',//搜索的关键词
       num:0,//控制升序降序
       url:'',//接收的参数
+      url2:'',
       lujing:0,//控制升序降序的显示
       list:[],//商品列表
       newlist:[],
@@ -233,7 +234,7 @@ export default {
      zonghe() {
       this.lujing=0
       this.list=[]
-      this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
+      this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=&cid_1${this.url}&cid_2=${this.url2}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
       this.newlist1= res.data.data
       this.newlist1.forEach(item => {
               this.list.push(item)
@@ -248,7 +249,7 @@ export default {
           this.list=[]
           this.num+=1
           this.lujing=1
-          this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=asc&encap=&jingying_type=`).then((res)=>{
+          this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=&cid_1${this.url}&cid_2=${this.url2}&fzFiltrate=&brandFiltrate=&priceSort=asc&encap=&jingying_type=`).then((res)=>{
           this.newlist1= res.data.data
           this.newlist1.forEach(item => {
               this.list.push(item)
@@ -259,7 +260,7 @@ export default {
         this.list=[]
           this.num+=1
           this.lujing=2
-          this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=desc&encap=&jingying_type=`).then((res)=>{
+          this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=&cid_1${this.url}&cid_2=${this.url2}&fzFiltrate=&brandFiltrate=&priceSort=desc&encap=&jingying_type=`).then((res)=>{
           this.newlist1= res.data.data
           this.newlist1.forEach(item => {
               this.list.push(item)
@@ -270,7 +271,7 @@ export default {
         this.list=[]
           this.num=0
           this.lujing=0
-          this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
+          this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=&cid_1${this.url}&cid_2=${this.url2}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
           this.newlist1= res.data.data
           this.newlist1.forEach(item => {
               this.list.push(item)
@@ -298,9 +299,10 @@ export default {
       }
   },
   created() {
-      this.url=  this.$route.query.search
-      console.log(this.url)
-      this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=${this.url}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
+      this.url=  this.$route.query.cid_1
+      this.url2=  this.$route.query.cid_2
+      console.log(this.url,this.url2)
+      this.$http.get(`/api/index.php/index/item/itemlist?page=${this.page1}&str_keyword=&cid_1${this.url}&cid_2=${this.url2}&fzFiltrate=&brandFiltrate=&priceSort=&encap=&jingying_type=`).then((res)=>{
       this.status= res.data.status
       if(this.status==500){
         this.finished = true;

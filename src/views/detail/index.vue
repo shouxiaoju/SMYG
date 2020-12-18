@@ -65,8 +65,9 @@ export default {
     
   },
   created() {
-     var url=(window.location.search).substr(1)
-       //this.url=(location.hash || '').split('?')[1].split('&')
+     //var url=(window.location.search).substr(1)
+    var url= this.$route.query.search
+    console.log(url)
       console.log(url)
       this.$http.get(`/api/index.php/index/item/itemDetail?item_id=${url}`).then((res)=>{
       this.list=res.data.data

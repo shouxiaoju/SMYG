@@ -42,7 +42,6 @@ export default {
       list:[],
 　　　checked:false, //是否全选
 　　　checkModel:[] //双向数据绑定的数组，我是用的id
-     
     };
   },
   computed: {},
@@ -86,24 +85,12 @@ export default {
      this.uid=JSON.parse(localStorage.getItem("token")).uid
      this.num=JSON.parse(localStorage.getItem("token")).token
       this.$http.get(`/api//index.php/index/index_order/cart?token=${this.num}&uid=${this.uid}&temporary_token=`).then((res)=>{
-      if(res.data.data.myshop.length!=0){
-        this.list=res.data.data.myshop
-      }else {
-        this.list=res.data.data.other
-        console.log(1)
-      }
-      //this.list=res.data.data.myshop
-      //this.list=res.data.data.other
-      console.log(res.data.data.myshop.lengths)
-     /*  console.log(res.data.data.myshop+res.data.data.other)
-      console.log(res.data.data.other) */
-      // console.log(JSON.parse(localStorage.getItem("token")).uid)
+      this.list=((res.data.data.myshop).concat(res.data.data.other))
+      console.log(res.data.data.myshop.length)
     }) 
    } else{
      this.$router.push('/login');
    }
-   /* https://m.szsmyg.com/api/index.php/index/index_order/cart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token= */
-    // http://localhost:8080/api//index.php/index/index_order/cart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token=
   },
   mounted() {
 
@@ -124,6 +111,14 @@ export default {
   margin: 0;
   padding: 0;
 }
+.car{
+  position: relative;
+}
+.van-nav-bar{
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
 .ckae{
   position: absolute;
   left: 10px;
@@ -132,6 +127,11 @@ img{
   width: 88px;
   height: 88px;
  margin-right: 10px;
+}
+ul{
+  overflow: hidden;
+  margin-top: 40px;
+  margin-bottom: 45px;
 }
 ul li{
   height: 135px;

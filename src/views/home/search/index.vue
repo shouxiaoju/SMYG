@@ -43,7 +43,8 @@ export default {
   watch: {},
   methods: {
   onSearch() {
-      this.$router.push(`/data?${this.value}`);
+    this.$router.push({path:'/data',query:{search:this.value}})
+      //this.$router.push(`/data?${this.value}`);
     },
     //返回
    onClickLeft(){

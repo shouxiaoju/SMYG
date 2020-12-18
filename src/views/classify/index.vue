@@ -45,7 +45,7 @@ export default {
       this.$router.push('/search');
     },
     but(id2){
-      this.$router.push(`/data?&cid_1=${this.id}&cid_2=${id2}`);
+      this.$router.push({path:'/data1',query:{cid_1:this.id,cid_2 : id2}})
     },
     buut(cid){
       this.id=cid
@@ -58,9 +58,8 @@ export default {
     }
   },
   created() {
-   
-    
     this.activeKey=(window.location.search).substr(1).split('&')[0]
+    console.log()
     if((window.location.search).substr(1).split('&')[1]){
       this.id=(window.location.search).substr(1).split('&')[1]
     }else{
