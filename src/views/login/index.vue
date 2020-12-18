@@ -41,20 +41,26 @@ export default {
       var formdata = new FormData()
       formdata.append('username', this.username)
       formdata.append('password', this.password)
-      this.$http
-        .post('/api/index.php/index/login/loginweb', formdata)
+   this.$http
+        .post("/api/index.php/index/login/loginweb", formdata)
         .then(res => {
-          const result = res.data
-          const info = result.info
-          const uid = res.data.uid
-          const code = +result.status
+          const result = res.data;
+          const info = result.info;
+          const uid = res.data.uid;
+          const token = result.token;
+          const code = +result.status;
           if (code === 200) {
-            localStorage.setItem('token', uid)
-            this.$router.push('/')
+            localStorage.setItem("token", JSON.stringify({
+              uid: uid,
+              token: token
+            }));
+            this.$router.push("/");
           } else {
-            alert(info)
+            alert(info);
           }
-        })
+          // console.log(token);
+        });
+
     },
     click () {
       this.falg = !this.falg

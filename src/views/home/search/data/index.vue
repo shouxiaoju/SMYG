@@ -115,13 +115,21 @@ export default {
   },
   methods: {
     jcar(index){
-       this.$http.get(`/api/index.php/index/order/addCart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token=&jingying_type=1&type=1&item_id=${index}&item_num=1`).then((res)=>{
+      if(localStorage.getItem("token")){
+         var uname=JSON.parse(localStorage.getItem("token")).uid
+        var num=JSON.parse(localStorage.getItem("token")).token
+        //console.log(uname)
+       this.$http.get(`/api/index.php/index/order/addCart?token=${num}&uid=${uname}&temporary_token=&jingying_type=1&type=1&item_id=${index}&item_num=1`).then((res)=>{
       if(res) {
         alert("已加入购物车")
       }else{
         alert("已加失败")
       }
     })
+      }else{
+         this.$router.push('/login');
+      }
+     
       
     },
     handleScroll() {

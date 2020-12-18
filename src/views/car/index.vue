@@ -36,6 +36,8 @@ export default {
     return {
       value:'',
       checked:'',
+      uid:'',
+      num:'',
       a:true,
       list:[],
 　　　checked:false, //是否全选
@@ -80,11 +82,28 @@ export default {
 　　}
   },
   created() {
-     this.$http.get(`/api//index.php/index/index_order/cart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token=`).then((res)=>{
-      this.list=res.data.data.other
-      console.log(res)
-      console.log(res.data.data.other)
+   if(localStorage.getItem("token")){
+     this.uid=JSON.parse(localStorage.getItem("token")).uid
+     this.num=JSON.parse(localStorage.getItem("token")).token
+      this.$http.get(`/api//index.php/index/index_order/cart?token=${this.num}&uid=${this.uid}&temporary_token=`).then((res)=>{
+      if(res.data.data.myshop.length!=0){
+        this.list=res.data.data.myshop
+      }else {
+        this.list=res.data.data.other
+        console.log(1)
+      }
+      //this.list=res.data.data.myshop
+      //this.list=res.data.data.other
+      console.log(res.data.data.myshop.lengths)
+     /*  console.log(res.data.data.myshop+res.data.data.other)
+      console.log(res.data.data.other) */
+      // console.log(JSON.parse(localStorage.getItem("token")).uid)
     }) 
+   } else{
+     this.$router.push('/login');
+   }
+   /* https://m.szsmyg.com/api/index.php/index/index_order/cart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token= */
+    // http://localhost:8080/api//index.php/index/index_order/cart?token=UZMizQsQXsPsGJGO7pAkJrJ9MU0k8VgT&uid=35286&temporary_token=
   },
   mounted() {
 
